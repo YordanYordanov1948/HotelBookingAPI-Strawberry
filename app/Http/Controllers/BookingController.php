@@ -6,8 +6,10 @@ use App\Models\Booking;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Events\BookingCreated;
+use App\Events\BookingCanceled;
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class BookingController extends Controller
 {
@@ -59,5 +61,32 @@ class BookingController extends Controller
                             })->exists();
 
         return !$existingBookings;
+    }
+
+    public function cancelBooking(Request $request, $bookingId)
+    {
+        try {
+            $booking = Booking::findOrFail($bookingId);
+            $booking->update(['status' => 'canceled']);
+            BookingCanceled::dispatch($booking);
+
+            return response()->json(['message' => 'Booking canceled successfully.'], 200);
+        } catch (\Exception $e) {
+            Log::error('Error canceling booking: ' . $e->getMessage());
+            return response()->json(['message' => 'Error canceling booking.'], 500);
+        }
+    }
+
+    public function deleteBooking(Request $request, $bookingId)
+    {
+        try {
+            $booking = Booking::findOrFail($bookingId);
+            $booking->delete();
+
+            return response()->json(['message' => 'Booking deleted successfully.'], 200);
+        } catch (\Exception $e) {
+            Log::error('Error deleting booking: ' . $e->getMessage());
+            return response()->json(['message' => 'Error deleting booking.'], 500);
+        }
     }
 }

@@ -93,6 +93,23 @@ Create a Booking (Protected)
   
 - ### Success Response: 201 Created, Returns the created booking details.
 
+
+### Cancel a Booking (PATCH)
+
+- **PATCH** `/bookings/{booking}/cancel`
+- **HEADERS** `Authorization: Bearer <access_token>`
+- **URL Parameters** `booking` should be replaced with the unique identifier of the booking you want to cancel
+- ### Success Response: 200 OK, Returns a success message indicating the booking has been canceled.
+
+
+### Delete a Booking (DELETE)
+
+- **DELETE** `/bookings/{booking}/cancel`
+- **HEADERS** `Authorization: Bearer <access_token>`
+- **URL Parameters** `booking` should be replaced with the unique identifier of the booking you want to cancel
+- ### Success Response: 200 OK, Returns a success message indicating the booking has been canceled.
+
+
 Customer Management
 
 List All Customers

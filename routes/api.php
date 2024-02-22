@@ -35,6 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/bookings', [BookingController::class, 'store']);
     Route::post('/customers', [CustomerController::class, 'store']);
     Route::post('/payments', [PaymentController::class, 'store']);
+    Route::patch('/bookings/{booking}/cancel', [BookingController::class, 'cancelBooking']);
+    Route::delete('/bookings/{booking}', [BookingController::class, 'deleteBooking']);
 
     // User route
     Route::get('/user', function (Request $request) {
