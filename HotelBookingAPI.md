@@ -37,9 +37,31 @@ All URLs referenced in the documentation have the base path `http://localhost:80
     "password": "password"
   }
 
+
 ### Success Response: 200 OK, Returns an access token.
 
-### Endpoints
+
+### Customer Management
+
+List All Customers
+
+- **GET** `/customers`
+- ### Success Response: 200 OK, Returns a list of customers.
+
+Create a Customer (Protected)
+
+- **POST** `/customers`
+- **HEADERS** `Authorization: Bearer <access_token>`
+- **Body**:
+
+  ```json
+  {
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "phone_number": "1234567890"
+  }
+
+- ### Success Response: 201 Created, Returns the created customer details.
 
 ### Room Management
 
@@ -64,7 +86,7 @@ Create a Room (Protected)
     "number": "101",
     "type": "Deluxe",
     "price_per_night": 150,
-    "status": "available",
+    "status": "available"
   }
   
 - ### Success Response: 201 Created, Returns the created room details.
@@ -108,30 +130,6 @@ Create a Booking (Protected)
 - **HEADERS** `Authorization: Bearer <access_token>`
 - **URL Parameters** `booking` should be replaced with the unique identifier of the booking you want to cancel
 - ### Success Response: 200 OK, Returns a success message indicating the booking has been canceled.
-
-
-Customer Management
-
-List All Customers
-
-- **GET** `/customers`
-- ### Success Response: 200 OK, Returns a list of customers.
-
-Create a Customer (Protected)
-
-- **POST** `/customers`
-- **HEADERS** `Authorization: Bearer <access_token>`
-- **Body**:
-
-  ```json
-  {
-    "name": "John Doe",
-    "email": "johndoe@example.com",
-    "phone_number": "1234567890"
-  }
-
-- ### Success Response: 201 Created, Returns the created customer details.
-
 
 Payment Recording
 
